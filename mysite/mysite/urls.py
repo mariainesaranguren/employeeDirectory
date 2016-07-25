@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
 #    url(r'^$', include('urls')) #DASDASDASDAS
     url(r'^admin/', admin.site.urls), #Can think of this as it's own app
-    url(r'^$', include('webapp.urls')) #Includes webapp.urls.py file. When someone goes to webapp on website, this tells it it needs to go to webapp.urls to figure out the view it has to provide
+    url(r'^', include('webapp.urls')) #Includes webapp.urls.py file. When someone goes to webapp on website, this tells it it needs to go to webapp.urls to figure out the view it has to provide
+    #Removed $
 ]
