@@ -34,7 +34,6 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
             next(reader, None)  #Skip the headers TODO: still showing up on database, fix.
             for row in reader:
                 #TODO: Create Employee and save to database
-                # import pdb; pdb.set_trace()
                 #Row: NAME, TEAM, POSITION, MANAGER, BIRTH DATE, AGE, START DATE
                 #Parse start date. Given in day#-month-year#, must be in YYYY-MM-DD format.
                 start_date_raw=row[6]
@@ -42,5 +41,20 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
                 #Parse birth date
                 birth_date_raw=row[4]
                 birth_date_final=self.format_date_field(birth_date_raw)
-                employee = Employee.objects.create(name=row[0], team=row[1], title=row[2], manager=row[3], birth_date=birth_date_final, age=int(math.floor(float(row[5]))), start_date=start_date_final, email=row[7]) #No phoneNumber
+                # employee = Employee.objects.create(name=row[0], team=row[1], title=row[2], manager=row[3], birth_date=birth_date_final, age=int(math.floor(float(row[5]))), start_date=start_date_final, email=row[7]) #No phoneNumber
+                updated_values = {'team': row[1],
+                                  'title': row[2],
+                                  'manager': row[3],
+                                  'birth_date': birth_date_final,
+                                  'age': int(math.floor(float(row[5]))),
+                                  'start_date': start_date_final,
+                                  'email': row[7]}
+                employee, created = Employee.objects.update_or_create(name=row[0], defaults=updated_values)
+                if created:
+                    print 'New employee added'
+                else:
+                    print 'Employee %s has been updated' % (employee.name,)
                 # employee.save()
+
+
+# import pdb; pdb.set_trace()

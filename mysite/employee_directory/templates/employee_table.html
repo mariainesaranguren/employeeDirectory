@@ -1,0 +1,26 @@
+<table>
+	<caption>Employee Directory</caption>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Team</th>
+		<th>Position</th>
+		<th>Manager</th>
+		<th>Birth Date</th>
+		<th>Age</th>
+		<th>Start Date</th>
+	</tr>
+
+	{% for employee in results %}
+	<tr>
+  	<td>{{ employee.name }}</td>
+  	<td>{{ employee.email }}</td>
+  	<td>{{ employee.team }}</td>
+		<td>{{ employee.position }}</td>
+		<td>{{ employee.manager }}</td>
+		<td>{{ employee.birth_date }}</td>
+		<td>{{ employee.age }}</td>
+		<td>{{ employee.start_date }}</td>
+	</tr>
+	{% endfor %}
+</table>

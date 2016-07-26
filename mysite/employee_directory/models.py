@@ -4,8 +4,6 @@ from datetime import datetime
 
 #Employee model using django
 
-from django.db import models
-
 class Employee(models.Model):
     # TODO: Add encoding somewhere to take care of non-ASCII characters
     name = models.CharField("Name", max_length=60)
