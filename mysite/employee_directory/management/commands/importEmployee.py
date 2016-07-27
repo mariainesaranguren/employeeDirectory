@@ -28,7 +28,7 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
     def handle(self, *args, **options):
         #TODO: Try and except action here later ?
         # https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
-        with open('/Users/mariainesaranguren/Wizeline/mysite/oldDirectory/Employee.csv') as csvfile:
+        with open('/../../oldDirectory/Employee.csv') as csvfile:
             #TODO: Change path for csv file if moved or change at end (to not include my home directory)
             reader = csv.reader(csvfile)
             next(reader, None)  #Skip the headers TODO: still showing up on database, fix.

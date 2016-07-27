@@ -14,7 +14,12 @@
 #     return render(request, 'employee_table.html', {'table': table})
 
 from django.shortcuts import render
+from django_tables2 import RequestConfig
 from employee_directory.models import Employee
+from employee_directory.tables import EmployeeTable
 
 def index(request):
-    return render(request, 'employee_table.html', {'employees': Employee.objects.all()})
+    # return render(request, 'employee_table.html', {'employees': Employee.objects.all()})
+	table = EmployeeTable(Employee.objects.all())
+	RequestConfig(request).configure(table)
+	return render(request, 'employee_table.html', {'table': table})

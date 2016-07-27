@@ -5,11 +5,11 @@
 <!-- <h1>{{STATIC_URL}}</h1> -->
     <head>
 				<!-- {% load staticfiles %} -->
-        <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+				<link rel="stylesheet" href="{{ STATIC_URL }}static/django_tables2/themes/paleblue/css/screen.css" />
 				<!-- <link rel="stylesheet" href="/Users/mariainesaranguren/Wizeline/mysite/lib/python2.7/site-packages/django_tables2/static/django_tables2/themes/paleblue/css/screen.css" /> -->
 		</head>
     <body>
-        {% render_table employees %}
+        {% render_table table %}
     </body>
 </html>
 
