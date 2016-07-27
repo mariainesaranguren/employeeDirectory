@@ -13,7 +13,6 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
 
     # A command must define handle()
     def handle(self, *args, **options):
-        self.stdout.write("LLLLLLLLALALALALALALALALAAL!")
         #TODO: Try and except action here later
         # https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
 
