@@ -28,7 +28,7 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
     def handle(self, *args, **options):
         #TODO: Try and except action here later ?
         # https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
-        with open('/Users/mariainesaranguren/Wizeline/oldDirectory/Employee.csv') as csvfile:
+        with open('/Users/mariainesaranguren/Wizeline/mysite/oldDirectory/Employee.csv') as csvfile:
             #TODO: Change path for csv file if moved or change at end (to not include my home directory)
             reader = csv.reader(csvfile)
             next(reader, None)  #Skip the headers TODO: still showing up on database, fix.
@@ -48,12 +48,14 @@ class Command(BaseCommand): #The class must be named Command, and subclass BaseC
                                   'birth_date': birth_date_final,
                                   'age': int(math.floor(float(row[5]))),
                                   'start_date': start_date_final,
-                                  'email': row[7]}
+                                  'email': row[7],
+                                  'image':  row[8]}
+                # TODO: change the first field from name to email, adjust correspondingly in updated_values
                 employee, created = Employee.objects.update_or_create(name=row[0], defaults=updated_values)
                 if created:
-                    print 'New employee added'
+                    print 'New employee %s has been added.' % (employee.name,)
                 else:
-                    print 'Employee %s has been updated' % (employee.name,)
+                    print 'Employee %s has been updated ' % (employee.name,)
                 # employee.save()
 
 

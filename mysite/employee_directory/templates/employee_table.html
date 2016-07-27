@@ -1,26 +1,50 @@
+
+{% load render_table from django_tables2 %}
+<!-- <!doctype html> -->
+<html>
+<!-- <h1>{{STATIC_URL}}</h1> -->
+    <head>
+				<!-- {% load staticfiles %} -->
+        <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+				<!-- <link rel="stylesheet" href="/Users/mariainesaranguren/Wizeline/mysite/lib/python2.7/site-packages/django_tables2/static/django_tables2/themes/paleblue/css/screen.css" /> -->
+		</head>
+    <body>
+        {% render_table employees %}
+    </body>
+</html>
+
+
+<!-- <img src="http://www.clker.com/cliparts/B/q/g/J/k/c/dasda-md.png" alt="" style="width:50px; height:auto;">
 <table>
 	<caption>Employee Directory</caption>
 	<tr>
-		<th>Name</th>
-		<th>Email</th>
-		<th>Team</th>
-		<th>Position</th>
-		<th>Manager</th>
-		<th>Birth Date</th>
-		<th>Age</th>
-		<th>Start Date</th>
+		<th div align="left">Name</th>
+		<th div align="left">Photo</th>
+		<th div align="left">Email</th>
+		<th div align="left">Team</th>
+		<th div align="left">Title</th>
+		<th div align="left">Manager</th>
+		<th div align="left">Birth Date</th>
+		<th div align="left">Age</th>
+		<th div align="left">Start Date</th>
 	</tr>
 
 	{% for employee in results %}
 	<tr>
-  	<td>{{ employee.name }}</td>
+	<div class="well">
+  	<!-- <td>{{ employee.name }}</td> -->
+		<!-- <td><img src="/Users/mariainesaranguren/Wizeline/mysite/media/smile.png" alt="" style="width:50px; height:auto;"></td> -->
+		<!-- <td><img src={{employee.image}}></td> -->
+		<!-- <td>{{MEDIA_URL}}/{{employee.image}}</td>
+		<td><img src="{{MEDIA_URL}}/{{employee.image}}"></td>
   	<td>{{ employee.email }}</td>
   	<td>{{ employee.team }}</td>
-		<td>{{ employee.position }}</td>
+		<td>{{ employee.title }}</td>
 		<td>{{ employee.manager }}</td>
 		<td>{{ employee.birth_date }}</td>
 		<td>{{ employee.age }}</td>
 		<td>{{ employee.start_date }}</td>
 	</tr>
-	{% endfor %}
-</table>
+	{% endfor %} -->
+	<!-- </div> -->
+<!-- </table> --> -->

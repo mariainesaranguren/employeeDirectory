@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'employee_directory',
+    'django_tables2',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -61,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request', #Added for django-tables2 app
             ],
         },
     },
@@ -68,6 +70,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #'/Users/mariainesaranguren/Wizeline/mysite'
+MEDIA_URL = '/media/' #'http://localhost:8000/'
+#TODO: Change MEDIA_ROOT and MEDIA_URL
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -103,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -122,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_URL = os.path.join(BASE_DIR, '../lib/python2.7/site-packages/django_tables2/static/')
