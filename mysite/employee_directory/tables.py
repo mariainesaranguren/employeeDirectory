@@ -6,3 +6,4 @@ class EmployeeTable(tables.Table):
         model = Employee
         # add class="paleblue" to <table> tag
         attrs = {'class': 'paleblue'}
+        exclude = ('id',) #Hide id ccolumn
