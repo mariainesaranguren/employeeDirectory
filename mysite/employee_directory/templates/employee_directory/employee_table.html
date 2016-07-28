@@ -1,15 +1,18 @@
-
 {% load render_table from django_tables2 %}
-<!-- <!doctype html> -->
+<!doctype html>
 <html>
+
 <!-- <h1>{{STATIC_URL}}</h1> -->
     <head>
+				<h2 div align="left">Wizeline Employee Directory</h2>
 				<!-- {% load staticfiles %} -->
 				<link rel="stylesheet" href="{{ STATIC_URL }}static/django_tables2/themes/paleblue/css/screen.css" />
 				<!-- <link rel="stylesheet" href="/Users/mariainesaranguren/Wizeline/mysite/lib/python2.7/site-packages/django_tables2/static/django_tables2/themes/paleblue/css/screen.css" /> -->
 		</head>
     <body>
+			{% block content %}
         {% render_table table %}
+			{% endblock %}
     </body>
 </html>
 
@@ -32,10 +35,9 @@
 	{% for employee in results %}
 	<tr>
 	<div class="well">
-  	<!-- <td>{{ employee.name }}</td> -->
-		<!-- <td><img src="/Users/mariainesaranguren/Wizeline/mysite/media/smile.png" alt="" style="width:50px; height:auto;"></td> -->
-		<!-- <td><img src={{employee.image}}></td> -->
-		<!-- <td>{{MEDIA_URL}}/{{employee.image}}</td>
+  	<td>{{ employee.name }}</td> -->
+		<td><img src="/Users/mariainesaranguren/Wizeline/mysite/media/smile.png" alt="" style="width:50px; height:auto;"></td>
+		<td>{{MEDIA_URL}}/{{employee.image}}</td>
 		<td><img src="{{MEDIA_URL}}/{{employee.image}}"></td>
   	<td>{{ employee.email }}</td>
   	<td>{{ employee.team }}</td>
@@ -45,6 +47,6 @@
 		<td>{{ employee.age }}</td>
 		<td>{{ employee.start_date }}</td>
 	</tr>
-	{% endfor %} -->
-	<!-- </div> -->
-<!-- </table> --> -->
+	{% endfor %}
+ </div> -->
+ </table> -->

@@ -16,6 +16,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+#TODO: Keep SECRET_KEY secret and turn DEBUG off.
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 's-9pww!gu)0p4*u70gf3q@wq4h3$ac=6ul*w+&rkc*szultnjf'
 
@@ -31,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'employee_directory',
     'django_tables2',
+    # 'django-filters',
+    # 'django_tables2_simplefilter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
