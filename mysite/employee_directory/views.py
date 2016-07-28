@@ -18,7 +18,6 @@ from django_tables2 import RequestConfig
 from employee_directory.models import Employee
 from employee_directory.tables import EmployeeTable
 from employee_directory.filters import EmployeeFilter
- #import EmployeeFilter
 
 #Default view
 def index(request):
@@ -32,7 +31,7 @@ def employee_list(request):
     f = EmployeeFilter(request.GET, queryset=Employee.objects.all())
     table = EmployeeTable(f.qs)
     RequestConfig(request, paginate={"per_page": 25, "page": 1}).configure(table)
-    return render(request, 'employee_directory/filtering.html', {'filter': f})
+    return render(request, 'employee_directory/filtering.html', {'filter': f, 'table': table})
 
 
 # queryset = Fitzroyfalls.objects.select_related().all()

@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'employee_directory',
     'django_tables2',
     # 'django-filters',
-    # 'django_tables2_simplefilter',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

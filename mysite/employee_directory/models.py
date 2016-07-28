@@ -28,7 +28,7 @@ class Employee(models.Model):
         db_table = 'employee_directory_employee' #Name of the database table for the model
 
 # ########## Creating and Declaring Filter Set
-# 
+#
 # class EmployeeFilter(django_filters.FilterSet): ##Should this be in filters.py?
 #     name = django_filters.CharFilter(lookup_expr='icontains')
 #     team = django_filters.CharFilter(lookup_expr='icontains')
