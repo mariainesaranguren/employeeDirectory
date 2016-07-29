@@ -4,8 +4,17 @@
 {% block content %}
     <form action="" method="get">
 			<!-- The form attribute contains a normal Django form, and when we iterate over the FilterSet we get the objects in the resulting queryset. -->
-        {{ filter.form.as_p }}
-        <input type="submit" />
+      <div class="row">
+        <div class="col-md-3">
+          <label for="id_name__icontains">Name:</label> <input id="id_name__icontains" name="name__icontains" type="text" placeholder="Name"> <span class="helptext"></span>
+        </div>
+        <div class="col-md-3">
+          <label for="id_team__iexact">Team:</label> <input id="id_team__iexact" name="team__iexact" type="text" placeholder="Team" > <span class="helptext"></span>
+        </div>
+        <div class="col-md-2">
+          <input type="submit">
+        </div>
+      </div>
     </form>
     {% for obj in filter %}
         <!-- {{ obj.name }} <br/> -->
