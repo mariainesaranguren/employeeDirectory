@@ -30,7 +30,7 @@ def index(request):
 def employee_list(request):
     f = EmployeeFilter(request.GET, queryset=Employee.objects.all())
     table = EmployeeTable(f.qs)
-    RequestConfig(request, paginate={"per_page": 25, "page": 1}).configure(table)
+    RequestConfig(request, paginate={"per_page": 30, "page": 1}).configure(table)
     return render(request, 'employee_directory/filtering.html', {'filter': f, 'table': table})
 
 

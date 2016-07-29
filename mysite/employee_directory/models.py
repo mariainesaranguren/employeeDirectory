@@ -10,8 +10,8 @@ class Employee(models.Model):
     # TODO: Add encoding somewhere to take care of non-ASCII characters ?
     name = models.CharField("Name", max_length=60)
     # lastName = models.CharField(max_length=30)
-    # image = models.ImageField("Photo", upload_to='media', default='/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg')
-    image = models.CharField("Photo", max_length=100, default="/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg")
+    image = models.ImageField("Photo", upload_to='{{MEDIA_URL}}/media/', default='/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg')
+    # image = models.CharField("Photo", max_length=100, default="/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg")
     team = models.CharField("Team", max_length=60, default="NA")
     manager = models.CharField("Manager", max_length=60, default="NA")
     title = models.CharField("Title", max_length=40, default="NA")

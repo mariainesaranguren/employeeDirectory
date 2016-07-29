@@ -9,6 +9,6 @@ class EmployeeFilter(django_filters.FilterSet): ##Should this be in filters.py?
         fields =  {
             'name': ['icontains'],
             'team': ['iexact'],
-            'start_date': ['gt']
+            # 'start_date': ['gt']
         }
         # ['name', 'team'] #fields that will be filtered exactly
