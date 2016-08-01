@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+# Running manage.py sets the DJANGO_SETTINGS_MODULE environment variable,
+# which gives Django the Python import path to your mysite/settings.py file.
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,18 +33,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin',     # With this Django automatically looks for an admin module in each application and imports it. It is the admin site. You will use it shortly.
     'employee_directory',
+    'django_filters',
     'django_tables2',
-    # 'django-filters',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.auth',      # Django admin dependency, an authentication system.
+    'django.contrib.contenttypes',  # Django admin dependency, a framework for content types.
+    'django.contrib.sessions',  # Django admin dependency, a session framework.
+    'django.contrib.messages',  # Django admin dependency, a messaging framework.
+    'django.contrib.staticfiles',   # Django admin dependency, a framework for managing static files.
 ]
 
-MIDDLEWARE_CLASSES = [ #Cosas que usa django, no quitar
+MIDDLEWARE_CLASSES = [ # For django use.
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +53,8 @@ MIDDLEWARE_CLASSES = [ #Cosas que usa django, no quitar
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  #Added for django admin
+    'django.contrib.messages.middleware.MessageMiddleware',     #Added for django admin
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -57,7 +62,9 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'mysite/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,8 +73,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request', #Added for django-tables2 app
+                'django.contrib.auth.context_processors.auth', #Added for django admin
+                'django.contrib.messages.context_processors.messages', #Added for django admin
             ],
         },
+        # 'LOADERS': 'django.template.loaders.filesystem.Loader',
     },
 ]
 

@@ -18,35 +18,6 @@ from django_tables2 import RequestConfig
 from employee_directory.models import Employee
 from employee_directory.tables import EmployeeTable
 from employee_directory.filters import EmployeeFilter
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import (
-    CreateView,
-    UpdateView,
-    DeleteView
-)
-
-class EmployeeList(ListView):
-    model = Employee
-
-class EmployeeDetail(DetailView):
-    model = Employee
-
-class EmployeeCreation(CreateView):
-    model = Employee
-    success_url = reverse_lazy('employees:list')
-    fields = ['name', 'image', 'team', 'manager', 'title', 'email', 'phone_number', 'birth_date', 'age', 'start_date', 'created_at', 'updated_at']
-
-class EmployeeUpdate(UpdateView):
-    model = Employee
-    success_url = reverse_lazy('employees:list')
-    fields = ['name', 'image', 'team', 'manager', 'title', 'email', 'phone_number', 'birth_date', 'age', 'start_date', 'created_at', 'updated_at']
-
-class EmployeeDelete(DeleteView):
-    model = Employee
-    success_url = reverse_lazy('employees:list')
-
 
 #Default view
 def index(request):
@@ -61,10 +32,3 @@ def employee_list(request):
     table = EmployeeTable(f.qs)
     RequestConfig(request, paginate={"per_page": 30, "page": 1}).configure(table)
     return render(request, 'employee_directory/filtering.html', {'filter': f, 'table': table})
-
-
-# queryset = Fitzroyfalls.objects.select_related().all()
-# f = FitzroyfallsFilter(request.GET, queryset=queryset)
-# table = FitsroyFallsTable(f.qs)
-# RequestConfig(request, paginate={"per_page": 25, "page": 1}).configure(table)
-# return render(request, 'query.html', {'table': table, 'filter': f})
