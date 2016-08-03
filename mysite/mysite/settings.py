@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -29,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Project variables
+project_id = 'wizeline-employee-directory'
+gae_db_instance = 'employee-directory'
+db_name = 'employee_directory'
 
 # Application definition
 
@@ -85,16 +88,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'employee_directory',
-        'USER': 'root',
-        'PASSWORD': 'mySQL20@', #TODO move this to an environment variable (os.getenv(password dasdasda))
-        'HOST': '127.0.0.1',
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+   # Running on production App Engine, so use a Google Cloud SQL database.
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'HOST': '/cloudsql/%s:%s' % (project_id, gae_db_instance),
+           'NAME': db_name,
+           'USER': 'root',
+       }
+   }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': db_name,
+            'USER': 'root',
+            'PASSWORD': 'mySQL20@', #TODO move this to an environment variable (os.getenv(password dasdasda))
+            'HOST': '127.0.0.1',
+        }
     }
-}
 
 DEFAULT_INDEX_TABLESPACE = 'employees'
 
@@ -133,8 +146,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT= os.path.join(BASE_DIR, 'static') #'employee_directory/static/employee_directory') # The directory from which you would like to serve these files
-STATIC_URL = '/static/' #/employee_directory/static/'
+STATIC_ROOT= os.path.join(BASE_DIR, 'static') # The directory from which you would like to serve these files
+STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
 #     '/var/www/static/',
