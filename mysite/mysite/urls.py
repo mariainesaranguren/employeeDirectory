@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views # To reset passwords in admin
 admin.autodiscover() # This function attempts to import an admin module in each installed application. Such modules are expected to register models with the admin.
 from employee_directory.admin import admin_site #For admin site
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls), #Can think of this as it's own app
@@ -30,3 +32,6 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Serving files uploaded by a user during development
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # Serving static files during development

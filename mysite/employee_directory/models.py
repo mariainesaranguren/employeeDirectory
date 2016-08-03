@@ -18,24 +18,24 @@ class Employee(models.Model):
     #     self.age = age_calc
 
     def __unicode__(self):
-       return self.name # Will display each employee's name in admin site, instead of "Employee object"
+       return self.last_name # Will display each employee's name in admin site, instead of "Employee object"
+
     # TODO: Add encoding somewhere to take care of non-ASCII characters ?
     # First argument is verbose name
     # blank=True means that field will not be required to create an entry
-    name = models.CharField("Name", max_length=60)
-    # lastName = models.CharField(max_length=30)
-    image = models.ImageField("Photo", upload_to='{{MEDIA_URL}}/media/', default='/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg', blank=True)
+    image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=True)
     # image = models.CharField("Photo", max_length=100, default="/Users/mariainesaranguren/Wizeline/mysite/media/default.jpeg")
+    first_name = models.CharField("First Name", max_length=30, default='NA')
+    last_name = models.CharField("Last Name", max_length=30, default='NA')
+    # name = models.CharField("Name", max_length=60)
+    # lastName = models.CharField(max_length=30)
+    email = models.EmailField("Email", max_length=40, blank=True, null=True)
     team = models.CharField("Team", max_length=60, blank=True)
-    manager = models.CharField("Manager", max_length=60, blank=True)
     title = models.CharField("Title", max_length=40, blank=True)
-    email = models.EmailField("Email", max_length=25, blank=True, null=True)
+    manager = models.CharField("Manager", max_length=60, blank=True)
     phone_number = models.CharField("Phone Number", max_length=20, blank=True)
-    birth_date = models.DateField("Birth Date", default=datetime.now, auto_now=False, auto_now_add=False, blank=True)
-    # agecalc = property(calculate_age)
-    # age = models.IntegerField("Age") #, blank=True, null=True, default=int(agecalc))
-    age = models.IntegerField("Age", blank=True, null=True)
-    start_date = models.DateField("Start Date", blank=True) #default=datetime.now, auto_now=False, auto_now_add=False, blank=True)
+    start_date = models.DateField("Start Date", default=datetime.now, blank=True, null=True) #default=datetime.now, auto_now=False, auto_now_add=False, blank=True)
+    birth_date = models.DateField("Birth Date", default=datetime.now, blank=True, null=True)
     created_at = models.DateField("Created at", auto_now=False, auto_now_add=True) #Automatically sets field to now when object is first created
     updated_at = models.DateField("Updated at", auto_now=True, auto_now_add=False) #Automatically sets field to now when object is saved
 

@@ -15,53 +15,21 @@
       </div>
     </nav>
 
-
+<!-- Header -->
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 				<h2 div align="center">Wizeline Employee Directory</h2>
         <br>
-				<!-- {% load staticfiles %} -->
-				<link rel="stylesheet" href="{{ STATIC_URL }}static/django_tables2/themes/paleblue/css/screen.css" />
-				<!-- <link rel="stylesheet" href="/Users/mariainesaranguren/Wizeline/mysite/lib/python2.7/site-packages/django_tables2/static/django_tables2/themes/paleblue/css/screen.css" /> -->
 		</head>
+
+<!-- Filters: HTML found in filtering.html -->
     <body>
 			{% block content %} {% endblock %}
       <br>
+
+<!-- Employee Table -->
       {% render_table table %}
     </body>
 </html>
 
-
-<!-- <img src="http://www.clker.com/cliparts/B/q/g/J/k/c/dasda-md.png" alt="" style="width:50px; height:auto;">
-<table>
-	<caption>Employee Directory</caption>
-	<tr>
-		<th div align="left">Name</th>
-		<th div align="left">Photo</th>
-		<th div align="left">Email</th>
-		<th div align="left">Team</th>
-		<th div align="left">Title</th>
-		<th div align="left">Manager</th>
-		<th div align="left">Birth Date</th>
-		<th div align="left">Age</th>
-		<th div align="left">Start Date</th>
-	</tr>
-
-	{% for employee in results %}
-	<tr>
-	<div class="well">
-  	<td>{{ employee.name }}</td> -->
-		<!-- <td><img src="/Users/mariainesaranguren/Wizeline/mysite/media/smile.png" alt="" style="width:50px; height:auto;"></td>
-		<td>{{MEDIA_URL}}/{{employee.image}}</td>
-		<td><img src="{{MEDIA_URL}}/{{employee.image}}"></td>
-  	<td>{{ employee.email }}</td>
-  	<td>{{ employee.team }}</td>
-		<td>{{ employee.title }}</td>
-		<td>{{ employee.manager }}</td>
-		<td>{{ employee.birth_date }}</td>
-		<td>{{ employee.age }}</td>
-		<td>{{ employee.start_date }}</td>
-	</tr>
-	{% endfor %}
- </div> -->
  </table>

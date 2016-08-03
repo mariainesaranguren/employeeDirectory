@@ -20,9 +20,15 @@ admin_site = MyAdminSite(name='admin')
 # admin_site.register(Employee)
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'team', 'manager', 'title', 'email', 'phone_number', 'birth_date')
+    list_display = [field.name for field in Employee._meta.fields]
+    # list_display = ('image', 'first_name', 'last_name', 'team', 'title', 'manager','email', 'phone_number', 'birth_date')
+    ordering = ('first_name',) # Set default ordering to A-Z by first_name
     exclude = ('age',) # TODO set up for age to be set automatically with birth_date
     actions = ['delete']
+    # change_form_template = 'wize_admin.html'
     # pass
+    css = {
+             'all': ('admin/wizeline-admin.css',)
+        }
 
 admin.site.register(Employee, EmployeeAdmin) # Not needed because below replaces default admin site.

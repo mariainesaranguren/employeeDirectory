@@ -1,20 +1,25 @@
 import django_tables2 as tables
 from employee_directory.models import Employee
-
+from django.utils.html import format_html
 
 # class ImageColumn(tables.Column):
 #     def render(self, value):
-#         return mark_safe('<img src="{{MEDIA_ROOT}}/mysite/media/%s" height="50" />' % escape(value))
+#         return mark_safe('<img src="mysite/media/%s" height="50" />' % escape(value))
 #         # return mark_safe('<img src="http://kingofwallpapers.com/smile/smile-018.jpg" height="50" />' % escape(value))
 
+class ImageColumn(tables.Column):
+    def render(self, value):
+        return format_html('<img src="/media/{}" height="100" width="100"/>', value)
+
 class EmployeeTable(tables.Table):
-    # employee_pic = ImageColumn('Photo!!')
-    # image = tables.Column(orderable=False)  #Restricts ordering for this column
-    phone_number = tables.Column(orderable=False)
+    image = ImageColumn(orderable=False)  #Restricts ordering for this column
     email = tables.Column(orderable=False)
+    title = tables.Column(orderable=False)
+    manager = tables.Column(orderable=False)
+    phone_number = tables.Column(orderable=False)
+
     class Meta:
         model = Employee
-        # add class="paleblue" to <table> tag
         attrs = {'class': 'table table-striped table-hover'}
-        exclude = ('id', 'created_at', 'updated_at', ) #Hide id column
+        exclude = ('id', 'created_at', 'updated_at', ) #Hide columns
         # fields = ('name', 'image')
