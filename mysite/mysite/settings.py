@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 # Project variables
 project_id = 'wizeline-employee-directory'
-gae_db_instance = 'employee-directory'
+gae_db_instance = 'wz-employee-directory'
 db_name = 'employee_directory'
 
 # Application definition
@@ -88,19 +88,33 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
+APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', '')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
-   # Running on production App Engine, so use a Google Cloud SQL database.
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.mysql',
-           'HOST': '/cloudsql/%s:%s' % (project_id, gae_db_instance),
-           'NAME': db_name,
-           'USER': 'root',
+import pdb; pdb.set_trace()
+if APP_ENVIRONMENT in ['development']:
+    if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+       # Running on production App Engine, so use a Google Cloud SQL database.
+       DATABASES = {
+           'default': {
+               'ENGINE': 'django.db.backends.mysql',
+               'HOST': '/cloudsql/%s:%s' % (project_id, gae_db_instance),
+               'NAME': db_name,
+               'USER': 'root',
+           }
        }
-   }
+    else:
+         # Running on production App Engine, so use a Google Cloud SQL database.
+         DATABASES = {
+             'default': {
+                 'ENGINE': 'django.db.backends.mysql',
+                 'HOST': os.getenv('DB_HOST', ''),
+                 'NAME': db_name,
+                 'USER': 'migrater',    # TODO Analyze this
+                 'PASSWORD': os.getenv('DB_PASSWORD', '')
+             }
+         }
 else:
     DATABASES = {
         'default': {
