@@ -40,7 +40,7 @@ IGNORE = (
     'testsuite',
     'numpy',
     'virtualenv',
-    'flake8',
+    'flake8'
 )
 
 # only used while copying from site-packages
@@ -61,7 +61,6 @@ def clean():
     """
     Removes the build folder and the APP_DIR softlinks
     """
-    remove_softlinks()
     shutil.rmtree(BUILD_DIR, ignore_errors=True)
 
 
@@ -71,13 +70,7 @@ def build(environment, version=None):
     """
     env.environment = environment
 
-    if env.environment == 'production':
-        if not version:
-            print (red("When deploying to production you must also specify a version of the app."))
-            raise SystemExit()
-        env.app_version = version
-    else:
-        env.app_version = env.environment
+    env.app_version = env.environment
 
     # make sure the correct environment vars are set
     env.environment_file = "environment-%s.sh" % (env.environment,)
@@ -95,13 +88,11 @@ def build(environment, version=None):
 
 def local_deploy(environment, version=None):
     env.environment = environment
-    remove_softlinks()
     if version:
         git_tag(version)
     build(environment, version)
     local('pip install -r requirements.txt', shell='/bin/bash')
-    local("appcfg.py update --no_cookies %s" % (BUILD_DIR,), shell='/bin/bash')
-    notify()
+    local("appcfg.py update %s" % (BUILD_DIR,), shell='/bin/bash')
 
 
 def remote_shell(environment):
@@ -153,9 +144,10 @@ def copy_libraries():
 
 
 def copy_app():
-    patterns = shutil.ignore_patterns(*IGNORE)
-    hard_copytree('mysite', BUILD_DIR, ignore=patterns)
-    hard_copytree('employee_directory', BUILD_DIR, ignore=patterns)
+    app_ignore = IGNORE + ('bin', 'include', 'lib', 'scripts')
+
+    patterns = shutil.ignore_patterns(*app_ignore)
+    hard_copytree(APP_DIR, BUILD_DIR, ignore=patterns)
 
 
 def copy_configs(destination=None):
@@ -213,7 +205,10 @@ def hard_copytree(src, dst, symlinks=False, ignore=None):
     """
     Allows to copy into an existing directory. Which shutil's copytree doesn't allow.
     """
+    ignored_files = ['.DS_Store', '.Python', 'include', 'lib', 'bin', 'scripts']
     for item in os.listdir(src):
+        if item in ignored_files:
+            continue
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
         if os.path.isdir(s):
