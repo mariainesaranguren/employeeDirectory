@@ -122,6 +122,23 @@ def git_tag(version):
     local('git push --tags', shell='/bin/bash')
 
 
+def manage(environment, *args, **kwargs):
+    env.environment = environment
+    wrapped_command = ''
+    command_prefix = kwargs.pop('command_prefix', None)
+    if command_prefix:
+        wrapped_command = '%s ' % command_prefix
+    additional_args = ' '.join(['%s=%s' % (key, value) for key, value in kwargs.iteritems()])
+    wrapped_command += 'APP_ENVIRONMENT=%s ./manage.py %s %s' % (env.environment, ' '.join(args), additional_args)
+
+    env.environment_file = 'environment-%s.sh' % (env.environment,)
+
+    if not os.path.isfile(env.environment_file):
+        abort(red('Could not find the environments variables file: %s' % (env.environment_file)))
+
+    with prefix('source %s' % (env.environment_file,)):
+        local(wrapped_command, shell='/bin/bash')
+
 def help():
     print("environments:")
     print("    development")
