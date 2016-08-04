@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from djangae.settings_base import *
 
 # Running manage.py sets the DJANGO_SETTINGS_MODULE environment variable,
 # which gives Django the Python import path to your mysite/settings.py file.
@@ -45,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',  # Django admin dependency, a session framework.
     'django.contrib.messages',  # Django admin dependency, a messaging framework.
     'django.contrib.staticfiles',   # Django admin dependency, a framework for managing static files.
+    'djangae',
 ]
 
 MIDDLEWARE_CLASSES = [ # For django use.
+    'djangae.contrib.security.middleware.AppEngineSecurityMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -104,7 +107,6 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': db_name,
             'USER': 'root',
-            'PASSWORD': 'mySQL20@', #TODO move this to an environment variable (os.getenv(password dasdasda))
             'HOST': '127.0.0.1',
         }
     }
