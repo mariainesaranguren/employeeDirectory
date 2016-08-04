@@ -12,7 +12,7 @@ class ImageColumn(tables.Column):
         return format_html('<img src="/media/{}" height="100" width="100"/>', value)
 
 class EmployeeTable(tables.Table):
-    # image = ImageColumn(orderable=False)  #Restricts ordering for this column
+    image = ImageColumn(orderable=False)  #Restricts ordering for this column
     email = tables.Column(orderable=False)
     title = tables.Column(orderable=False)
     manager = tables.Column(orderable=False)
