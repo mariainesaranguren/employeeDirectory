@@ -8,7 +8,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from djangae.settings_base import *
 
 # Running manage.py sets the DJANGO_SETTINGS_MODULE environment variable,
 # which gives Django the Python import path to your mysite/settings.py file.
@@ -28,6 +27,8 @@ SECRET_KEY = 's-9pww!gu)0p4*u70gf3q@wq4h3$ac=6ul*w+&rkc*szultnjf'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'local')
+IS_GAE = os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine')
 
 # Project variables
 project_id = 'wizeline-employee-directory'
@@ -46,11 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',  # Django admin dependency, a session framework.
     'django.contrib.messages',  # Django admin dependency, a messaging framework.
     'django.contrib.staticfiles',   # Django admin dependency, a framework for managing static files.
-    'djangae',
 ]
 
 MIDDLEWARE_CLASSES = [ # For django use.
-    'djangae.contrib.security.middleware.AppEngineSecurityMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,12 +87,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', '')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-if APP_ENVIRONMENT in ['development']:
-    if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+if APP_ENVIRONMENT in ('development'):
+    if IS_GAE:
        # Running on production App Engine, so use a Google Cloud SQL database.
        DATABASES = {
            'default': {
@@ -114,7 +112,8 @@ if APP_ENVIRONMENT in ['development']:
                  'PASSWORD': os.getenv('DB_PASSWORD', '')
              }
          }
-else:
+
+if APP_ENVIRONMENT == 'local':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -123,6 +122,7 @@ else:
             'HOST': '127.0.0.1',
         }
     }
+
 
 DEFAULT_INDEX_TABLESPACE = 'employees'
 

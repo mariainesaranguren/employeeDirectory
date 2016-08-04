@@ -35,3 +35,7 @@ libraries:
 - name: MySQLdb
   version: 1.2.5
 # [END django_app]
+
+
+env_variables:
+  APPLICATION_ENVIRONMENT: __APPLICATION_ENVIRONMENT__

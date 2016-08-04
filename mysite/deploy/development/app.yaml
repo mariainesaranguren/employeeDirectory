@@ -1,0 +1,4 @@
+version: development
+
+env_variables:
+  APP_ENVIRONMENT: development
