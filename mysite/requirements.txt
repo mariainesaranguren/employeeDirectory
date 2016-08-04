@@ -1,8 +1,7 @@
+git+https://github.com/potatolondon/djangae.git#egg=djangae
 Django==1.8
 MySQL-python==1.2.5
 PyYAML==3.10
 Fabric==1.8
-google-api-python-client==1.2
-virtualenv==1.11
 django-tables2==1.2.3
 django-filter==0.13.0
