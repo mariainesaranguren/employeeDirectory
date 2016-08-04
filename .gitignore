@@ -1,7 +1,11 @@
-*.DS_STORE
+
+.DS_Store
 *.Python
 *.pyc
 mysite/lib
 mysite/bin
 mysite/include
+mysite/dist
 
+*pip-selfcheck.json
+environment-*.sh
