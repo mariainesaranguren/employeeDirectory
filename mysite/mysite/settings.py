@@ -92,7 +92,6 @@ APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', '')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-import pdb; pdb.set_trace()
 if APP_ENVIRONMENT in ['development']:
     if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
        # Running on production App Engine, so use a Google Cloud SQL database.
