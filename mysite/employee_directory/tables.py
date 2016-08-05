@@ -21,5 +21,14 @@ class EmployeeTable(tables.Table):
     class Meta:
         model = Employee
         attrs = {'class': 'table table-striped table-hover'}
-        exclude = ('id', 'start_date', 'birth_date', 'created_at', 'updated_at', ) #Hide columns
-        # fields = ('name', 'image')
+        exclude = ('id',    #Hide columns
+                  'start_date',
+                  'address',
+                  'personal_email',
+                  'birth_date',
+                  'blood_type',
+                  'allergies',
+                  'emergency_contact',
+                  'created_at',
+                  'updated_at',
+        )
