@@ -29,7 +29,7 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
     def handle(self, *args, **options):
         #TODO: Try and except action here later ?
         # https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
-        with open('/Users/mariainesaranguren/Wizeline/mysite/oldDirectory/newData2.csv') as csvfile:
+        with open('/Users/mariainesaranguren/Wizeline/mysite/newData3.csv') as csvfile:
             #TODO: Change path for csv file if moved or change at end (to not include my home directory)
             reader = csv.reader(csvfile)
             next(reader, None)  #Skip the headers
@@ -38,36 +38,35 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                 # Row: NAME, TEAM, POSITION, MANAGER, BIRTH DATE, AGE, START DATE
                 # Parse start date. Given in day#-month-year#, must be in YYYY-MM-DD format.
                 start_date_raw=row[8]
-                print
-                print 'start_date_raw', start_date_raw
                 if start_date_raw != '':
                     start_date_final = self.format_date_field(start_date_raw)
                 else:
                     start_date_final = date.today()
                 # Parse birth date
                 birth_date_raw=row[6]
-                print 'birth_date_raw', birth_date_raw
                 if birth_date_raw != '':
                     birth_date_final = self.format_date_field(birth_date_raw)
                 else:
                     birth_date_final = date.today()
 
-                # Set values
+# Email ,First name,Last name,Team,Position,Manager,Birthdate,Age,Start Date,
+#Image,Cell Phone Number,Personal Email,Street and Number:,Neighborhood,City,State,Zip Code,Emergency Contact Info,Allergies,Blood Type,,,
                 updated_values = {
-                                #   'name':row[3],
                                   'first_name':row[1],
                                   'last_name':row[2],
                                   'team': row[3],
                                   'title': row[4],
                                   'manager': row[5],
                                   'birth_date': birth_date_final,
-                                #   'age': int(math.floor(float(row[8]))),
                                   'start_date': start_date_final,
-                                  'image':  row[9]}
-                print 'email:', row[0]
-
-                print birth_date_final
-                print start_date_final
+                                  'image':  row[9],
+                                  'phone_number': row[10],
+                                  'personal_email': row[11],
+                                  'address': row[12],
+                                  'emergency_contact': row[17],
+                                  'allergies': row[19],
+                                  'blood_type': row[20]
+                                  }
 
                 employee, created = Employee.objects.update_or_create(email=row[0], defaults=updated_values)
                 if created:

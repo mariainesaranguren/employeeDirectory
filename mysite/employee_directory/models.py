@@ -9,21 +9,13 @@ import django_filters
 ########## Declaring Employee Model
 
 class Employee(models.Model):
-    # @property
-    # def age(self):
-    #     return self._my_date
-    # @age.setter
-    # def age(self, value):
-    #     age_calc=today.year - self.year - ((today.month, today.day) < (self.month, self.day))
-    #     self.age = age_calc
-
     def __unicode__(self):
        return self.last_name # Will display each employee's name in admin site, instead of "Employee object"
 
     # TODO: Add encoding somewhere to take care of non-ASCII characters ?
     # First argument is verbose name
     # blank=True means that field will not be required to create an entry
-    image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=True)
+    image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=False)
     first_name = models.CharField("First Name", max_length=30, default='NA')
     last_name = models.CharField("Last Name", max_length=30, default='NA')
     title = models.CharField("Title", max_length=40, blank=True)
@@ -31,8 +23,13 @@ class Employee(models.Model):
     manager = models.CharField("Manager", max_length=60, blank=True)
     email = models.EmailField("Email", max_length=40, blank=True, null=True)
     phone_number = models.CharField("Phone Number", max_length=20, blank=True)
-    start_date = models.DateField("Start Date", default=datetime.now, blank=True, null=True) #default=datetime.now, auto_now=False, auto_now_add=False, blank=True)
+    start_date = models.DateField("Start Date", default=datetime.now, blank=True, null=True)
+    address = models.CharField("Address", max_length='200', default='NA', blank=True)
+    personal_email = models.EmailField("Personal Email", max_length=40, blank=True, null=True)
     birth_date = models.DateField("Birth Date", default=datetime.now, blank=True, null=True)
+    blood_type = models.CharField("Blood Type", max_length=3, default='NA', blank=True)
+    allergies = models.CharField("Allergies", max_length=40, default='None', blank=True)
+    emergency_contact = models.CharField("Emergency Contact", max_length=100, default='NA')
     created_at = models.DateField("Created at", auto_now=False, auto_now_add=True) #Automatically sets field to now when object is first created
     updated_at = models.DateField("Updated at", auto_now=True, auto_now_add=False) #Automatically sets field to now when object is saved
 
