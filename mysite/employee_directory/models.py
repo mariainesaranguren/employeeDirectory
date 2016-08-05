@@ -15,7 +15,7 @@ class Employee(models.Model):
     # TODO: Add encoding somewhere to take care of non-ASCII characters ?
     # First argument is verbose name
     # blank=True means that field will not be required to create an entry
-    image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=False)
+    image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=False) #Default photo assured in importEmployee.py
     first_name = models.CharField("First Name", max_length=30, default='NA')
     last_name = models.CharField("Last Name", max_length=30, default='NA')
     title = models.CharField("Title", max_length=40, blank=True)

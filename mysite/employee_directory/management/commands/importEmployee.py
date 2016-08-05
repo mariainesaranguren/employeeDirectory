@@ -25,17 +25,12 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
         date_final=datetime.date(year,month,day)
         return date_final
 
-    # A command must define handle()
     def handle(self, *args, **options):
-        #TODO: Try and except action here later ?
-        # https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
         with open('/Users/mariainesaranguren/Wizeline/mysite/newData3.csv') as csvfile:
             #TODO: Change path for csv file if moved or change at end (to not include my home directory)
             reader = csv.reader(csvfile)
             next(reader, None)  #Skip the headers
             for row in reader:
-                #TODO: Create Employee and save to database
-                # Row: NAME, TEAM, POSITION, MANAGER, BIRTH DATE, AGE, START DATE
                 # Parse start date. Given in day#-month-year#, must be in YYYY-MM-DD format.
                 start_date_raw=row[8]
                 if start_date_raw != '':
@@ -48,6 +43,9 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                     birth_date_final = self.format_date_field(birth_date_raw)
                 else:
                     birth_date_final = date.today()
+                # Set default photo if None
+                if row[9]=='':
+                    row[9]='employee_directory/NoPhotoDefault.gif'
 
 # Email ,First name,Last name,Team,Position,Manager,Birthdate,Age,Start Date,
 #Image,Cell Phone Number,Personal Email,Street and Number:,Neighborhood,City,State,Zip Code,Emergency Contact Info,Allergies,Blood Type,,,
@@ -74,6 +72,3 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                 else:
                     print 'Employee %s has been updated ' % (employee.last_name,)
                 employee.save()
-
-
-# import pdb; pdb.set_trace()
