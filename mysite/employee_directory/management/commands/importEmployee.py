@@ -62,8 +62,8 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                                   'personal_email': row[11],
                                   'address': row[12],
                                   'emergency_contact': row[17],
-                                  'allergies': row[19],
-                                  'blood_type': row[20]
+                                  'allergies': row[18],
+                                  'blood_type': row[19]
                                   }
 
                 employee, created = Employee.objects.update_or_create(email=row[0], defaults=updated_values)
