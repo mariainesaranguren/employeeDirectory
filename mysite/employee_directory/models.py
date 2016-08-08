@@ -32,7 +32,7 @@ class Employee(models.Model):
     birth_date = models.DateField("Birth Date", default=datetime.now, blank=True, null=True)
     blood_type = models.CharField("Blood Type", max_length=3, default='NA', blank=True)
     allergies = models.CharField("Allergies", max_length=100, default='None', blank=True)
-    emergency_contact = models.CharField("Emergency Contact", max_length=100, default='NA')
+    emergency_contact = models.CharField("Emergency Contact", max_length=100, default='NA', blank=True)
     created_at = models.DateField("Created at", auto_now=False, auto_now_add=True) #Automatically sets field to now when object is first created
     updated_at = models.DateField("Updated at", auto_now=True, auto_now_add=False) #Automatically sets field to now when object is saved
 
