@@ -31,27 +31,40 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
             reader = csv.reader(csvfile)
             next(reader, None)  #Skip the headers
             for row in reader:
+
                 # Parse start date. Given in day#-month-year#, must be in YYYY-MM-DD format.
                 start_date_raw=row[8]
                 if start_date_raw != '':
                     start_date_final = self.format_date_field(start_date_raw)
                 else:
                     start_date_final = date.today()
+
                 # Parse birth date
                 birth_date_raw=row[6]
                 if birth_date_raw != '':
                     birth_date_final = self.format_date_field(birth_date_raw)
                 else:
                     birth_date_final = date.today()
-                # Set default photo if None
+
+                # Force set default photo if None
                 if row[9]=='':
                     row[9]='employee_directory/NoPhotoDefault.gif'
 
+                # Construct address
+                if row [17] == 'Mexico':
+                    # Street and Number, Neighborhood (Colonia), City, State, Country, "CP" Zip Code
+                    address = '%s, %s, %s, %s, %s, CP %s' % (row[12], row[13], row[14], row[15], row[17], row[16])
+                elif row[17] == 'USA' or row[17] == 'United States' or row[17] == 'United States of America':
+                    # Street and Number, Neighborhood, City, State, Country, Zip Code
+                    address = '%s, %s, %s, %s, %s, %s' % (row[12], row[13], row[14], row[15], row[17], row[16])
+                else:
+                    address = 'NA'
 # Email ,First name,Last name,Team,Position,Manager,Birthdate,Age,Start Date,
-#Image,Cell Phone Number,Personal Email,Street and Number:,Neighborhood,City,State,Zip Code,Emergency Contact Info,Allergies,Blood Type,,,
+#Image,Cell Phone Number,Personal Email,Street and Number,Neighborhood,City,State,Zip Code,Emergency Contact Info,Allergies,Blood Type,,,
                 updated_values = {
                                   'first_name':row[1],
                                   'last_name':row[2],
+                                  'full_name': '%s %s' % (row[1], row[2]),
                                   'team': row[3],
                                   'title': row[4],
                                   'manager': row[5],
@@ -60,15 +73,15 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                                   'image':  row[9],
                                   'phone_number': row[10],
                                   'personal_email': row[11],
-                                  'address': row[12],
-                                  'emergency_contact': row[17],
-                                  'allergies': row[18],
-                                  'blood_type': row[19]
+                                  'address': address,
+                                  'emergency_contact': row[18],
+                                  'allergies': row[19],
+                                  'blood_type': row[20]
                                   }
 
                 employee, created = Employee.objects.update_or_create(email=row[0], defaults=updated_values)
                 if created:
-                    print 'New employee %s has been added.' % (employee.last_name,)
+                    print 'New employee %s %s has been added.' % (employee.first_name, employee.last_name,)
                 else:
-                    print 'Employee %s has been updated ' % (employee.last_name,)
+                    print 'Employee %s %s has been updated.' % (employee.first_name, employee.last_name,)
                 employee.save()

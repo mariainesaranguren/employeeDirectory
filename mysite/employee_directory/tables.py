@@ -2,11 +2,6 @@ import django_tables2 as tables
 from employee_directory.models import Employee
 from django.utils.html import format_html
 
-# class ImageColumn(tables.Column):
-#     def render(self, value):
-#         return mark_safe('<img src="mysite/media/%s" height="50" />' % escape(value))
-#         # return mark_safe('<img src="http://kingofwallpapers.com/smile/smile-018.jpg" height="50" />' % escape(value))
-
 class ImageColumn(tables.Column):
     def render(self, value):
         return format_html('<img src="/media/{}" height="100" width="100"/>', value)
@@ -22,6 +17,8 @@ class EmployeeTable(tables.Table):
         model = Employee
         attrs = {'class': 'table table-striped table-hover'}
         exclude = ('id',    #Hide columns
+                  'first_name',
+                  'last_name',
                   'start_date',
                   'address',
                   'personal_email',

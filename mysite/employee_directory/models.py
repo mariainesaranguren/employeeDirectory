@@ -3,8 +3,10 @@ from django.db import models
 from datetime import datetime
 import django_filters
 
-# from datetime import date
-# from PIL import Image
+# def image_tag(self):
+#     return u'<img src="%s" />' %self.image
+# image_tag.short_description = 'Image'
+# image_tag.allow_tags = True
 
 ########## Declaring Employee Model
 
@@ -18,6 +20,7 @@ class Employee(models.Model):
     image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=False) #Default photo assured in importEmployee.py
     first_name = models.CharField("First Name", max_length=30, default='NA')
     last_name = models.CharField("Last Name", max_length=30, default='NA')
+    full_name = models.CharField("Name", max_length=70, default='NA')
     title = models.CharField("Title", max_length=40, blank=True)
     team = models.CharField("Team", max_length=60, blank=True)
     manager = models.CharField("Manager", max_length=60, blank=True)
@@ -28,7 +31,7 @@ class Employee(models.Model):
     personal_email = models.EmailField("Personal Email", max_length=40, blank=True, null=True)
     birth_date = models.DateField("Birth Date", default=datetime.now, blank=True, null=True)
     blood_type = models.CharField("Blood Type", max_length=3, default='NA', blank=True)
-    allergies = models.CharField("Allergies", max_length=40, default='None', blank=True)
+    allergies = models.CharField("Allergies", max_length=100, default='None', blank=True)
     emergency_contact = models.CharField("Emergency Contact", max_length=100, default='NA')
     created_at = models.DateField("Created at", auto_now=False, auto_now_add=True) #Automatically sets field to now when object is first created
     updated_at = models.DateField("Updated at", auto_now=True, auto_now_add=False) #Automatically sets field to now when object is saved
