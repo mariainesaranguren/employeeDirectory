@@ -5,11 +5,6 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from .models import Employee
 
-# from datetime import date
-
-# from django.http import HttpResponse
-# from django.core import serializers
-
 admin.site.site_header = "Wizeline Employee Directory Administration"
 admin.site.site_title = "Wizeline Employee Directory"
 admin.site.index_title = "Index"
@@ -17,15 +12,45 @@ admin.site.index_title = "Index"
 class MyAdminSite(AdminSite):
     site_header = 'Wizeline Employee Directory Administration'
 admin_site = MyAdminSite(name='admin')
-# admin_site.register(Employee)
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Employee._meta.fields]
-    # list_display = ('image', 'first_name', 'last_name', 'team', 'title', 'manager','email', 'phone_number', 'birth_date')
-    ordering = ('first_name',) # Set default ordering to A-Z by first_name
-    exclude = ('age',) # TODO set up for age to be set automatically with birth_date
-    css = {
-             'all': ('admin/wizeline-admin.css',)
-        }
+    # def linked_first_name(self, employee):
+    #     if employee.first_name:
+    #         # change_employee_directory_page = 'admin:%s_%s_change' % (employee._meta.app_label, employee._meta.module_name)
+    #         url = reverse(change_employee_directory_page, args=(employee.employee_directory.id,))
+    #         return format_html(u'<a href="{}">{}</a>', url, employee.employee_directory.first_name)
+    #     return ''
+    # linked_first_name.short_description = 'First name'
 
-admin.site.register(Employee, EmployeeAdmin) # Not needed because below replaces default admin site.
+    list_display = (
+        'id',
+        'image',
+        # 'admin_image',
+        # 'linked_first_name',
+        'first_name',
+        'last_name',
+        'title',
+        'team',
+        'manager',
+        'email',
+        # 'phone_number',
+        # 'start_date',
+        # 'address',
+        # 'personal_email',
+        # 'birth_date',
+        # 'blood_type',
+        # 'allergies',
+        # 'emergency_contact',
+        # 'created_at',
+        # 'updated_at'
+    )
+    list_filter = (
+        'team',
+        'title',
+    )
+    search_fields = ['first_name', 'last_name']
+    ordering = ('first_name',) # Set default ordering to A-Z by first_name
+    # change_form_template = 'admin/change_form.html'
+
+
+admin.site.register(Employee, EmployeeAdmin)
