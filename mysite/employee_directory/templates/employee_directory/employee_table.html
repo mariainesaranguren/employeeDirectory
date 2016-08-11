@@ -5,7 +5,7 @@
 
 <!-- <h1>{{STATIC_URL}}</h1> -->
 
-<!-- Top Navigation Bar -->
+<!-- Top Navigation Bar and Header-->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -19,8 +19,6 @@
       </div>
     </nav>
 
-
-<!-- Header -->
     <head>
 				<h2 div align="center">Wizeline Employee Directory</h2>
         <br>
@@ -33,6 +31,10 @@
 
 <!-- Form -->
       {% block form %} {% endblock %}
+      <form action="http://localhost:8000/update">
+        See outdated information?
+          <input type="submit" value="Send the administrator an email" />
+      </form>
       <br>
 
 <!-- Employee Table -->

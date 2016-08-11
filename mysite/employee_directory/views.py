@@ -49,5 +49,5 @@ def update_info(request):
     f = EmployeeFilter(request.GET, queryset=Employee.objects.all())
     table = EmployeeTable(f.qs)
     RequestConfig(request, paginate={"per_page": 30, "page": 1}).configure(table)
-    
-    return render(request, 'employee_directory/update_form.html', {'form': form, 'filter': f, 'table': table})
+
+    return render(request, 'employee_directory/update_form.html', {'form': form})

@@ -9,6 +9,3 @@ urlpatterns = [
 	url(r'^$', views.employee_list),
 	url(r'update', views.update_info),
 	]
-
-
-# (r'^list/$', FilterView.as_view(model=Product)),
