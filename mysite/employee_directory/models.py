@@ -36,11 +36,6 @@ class Employee(models.Model):
     created_at = models.DateField("Created at", auto_now=False, auto_now_add=True) #Automatically sets field to now when object is first created
     updated_at = models.DateField("Updated at", auto_now=True, auto_now_add=False) #Automatically sets field to now when object is saved
 
-    # def admin_image(self):
-    #     return '<img src="%s"/>' % self.image
-    #     # return format_html(u'<img src="%s"/>' % self.image)
-    # admin_image.allow_tags = True
-
     class Meta:
         app_label = 'employee_directory' #Declares which app the model belongs to
         db_table = 'employee_directory_employee' #Name of the database table for the model
