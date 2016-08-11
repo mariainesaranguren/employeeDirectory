@@ -33,7 +33,7 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
             for row in reader:
 
                 # Parse start date. Given in day#-month-year#, must be in YYYY-MM-DD format.
-                start_date_raw=row[8]
+                start_date_raw=row[7]
                 if start_date_raw != '':
                     start_date_final = self.format_date_field(start_date_raw)
                 else:
@@ -47,16 +47,16 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                     birth_date_final = date.today()
 
                 # Force set default photo if None
-                if row[9]=='':
-                    row[9]='employee_directory/NoPhotoDefault.gif'
+                if row[8]=='':
+                    row[8]='employee_directory/NoPhotoDefault.gif'
 
-                # Construct address
-                if row [17] == 'Mexico':
+                # Concatenate address
+                if row [16] == 'Mexico':
                     # Street and Number, Neighborhood (Colonia), City, State, Country, "CP" Zip Code
-                    address = '%s, %s, %s, %s, %s, CP %s' % (row[12], row[13], row[14], row[15], row[17], row[16])
-                elif row[17] == 'USA' or row[17] == 'United States' or row[17] == 'United States of America':
+                    address = '%s, %s, %s, %s, %s, CP %s' % (row[11], row[12], row[13], row[14], row[16], row[15])
+                elif row[16] == 'USA' or row[17] == 'United States' or row[17] == 'United States of America':
                     # Street and Number, Neighborhood, City, State, Country, Zip Code
-                    address = '%s, %s, %s, %s, %s, %s' % (row[12], row[13], row[14], row[15], row[17], row[16])
+                    address = '%s, %s, %s, %s, %s, %s' % (row[11], row[12], row[13], row[14], row[16], row[15])
                 else:
                     address = 'NA'
 # Email ,First name,Last name,Team,Position,Manager,Birthdate,Age,Start Date,
@@ -70,13 +70,13 @@ class Command(BaseCommand): #T he class must be named Command, and subclass Base
                                   'manager': row[5],
                                   'birth_date': birth_date_final,
                                   'start_date': start_date_final,
-                                  'image':  row[9],
-                                  'phone_number': row[10],
-                                  'personal_email': row[11],
+                                  'image':  row[8],
+                                  'phone_number': row[9],
+                                  'personal_email': row[10],
                                   'address': address,
-                                  'emergency_contact': row[18],
-                                  'allergies': row[19],
-                                  'blood_type': row[20]
+                                  'emergency_contact': row[17],
+                                  'allergies': row[18],
+                                  'blood_type': row[19]
                                   }
 
                 employee, created = Employee.objects.update_or_create(email=row[0], defaults=updated_values)
