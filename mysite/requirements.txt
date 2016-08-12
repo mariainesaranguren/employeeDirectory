@@ -5,3 +5,4 @@ Fabric==1.8
 django-tables2==1.2.3
 django-filter==0.13.0
 Pillow==3.3.0
+GoogleAppEngineCloudStorageClient==1.9.22.1

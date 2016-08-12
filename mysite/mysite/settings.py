@@ -108,7 +108,7 @@ if APP_ENVIRONMENT in ('development'):
                  'ENGINE': 'django.db.backends.mysql',
                  'HOST': os.getenv('DB_HOST', ''),
                  'NAME': db_name,
-                 'USER': 'migrater',    # TODO Analyze this
+                 'USER': 'migrater',    # User with full access and any host
                  'PASSWORD': os.getenv('DB_PASSWORD', '')
              }
          }
