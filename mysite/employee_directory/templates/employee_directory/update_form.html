@@ -1,0 +1,47 @@
+<!-- Form template -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Top Navigation Bar and Header-->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://localhost:8000">
+        <img alt="Brand" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR-r8rxGIIcLiiUFyKTCraaZKaLx-jXdt1PyQCz8XQW6Pqtgg1G" width=30>
+      </a>
+      <p class="navbar-text navbar-right">
+        <a href="http://localhost:8000/admin/" class="navbar-link">Go to Admin Site</a>
+      </p>
+    </div>
+  </div>
+</nav>
+<head>
+			<h2 div align="center">Wizeline Employee Directory</h2>
+      <br>
+	</head>
+
+{% block form %}
+
+<div class="well">
+  <form action="/update/" method="post">
+      Send the administrator an email about information updates!
+      <input type="hidden" name="csrfmiddlewaretoken" value="CBFSUAfTFdpH07u5LRkeDaoC4r46nHg2">
+      </br>
+      </br>
+      <label for="id_subject">Subject:</label><input id="id_subject" maxlength="100" name="subject" type="text">
+      </br>
+      </br>
+      <label for="id_message">Message:</label><textarea cols="40" id="id_message" name="message" rows="10"></textarea>
+      </br>
+      </br>
+      <label for="id_sender">Sender:</label><input id="id_sender" name="sender" type="email">
+      </br>
+      </br>
+      <label for="id_cc_myself">Cc myself:</label><input id="id_cc_myself" name="cc_myself" type="checkbox">
+      </br>
+      </br>
+      <input type="submit" value="Send" href="http://localhost:8000">
+  </form>
+</div>
+
+{% endblock form %}
