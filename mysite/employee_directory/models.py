@@ -3,18 +3,12 @@ from django.db import models
 from datetime import datetime
 import django_filters
 
-# def image_tag(self):
-#     return u'<img src="%s" />' %self.image
-# image_tag.short_description = 'Image'
-# image_tag.allow_tags = True
-
 ########## Declaring Employee Model
 
 class Employee(models.Model):
     def __unicode__(self):
        return self.last_name # Will display each employee's name in admin site, instead of "Employee object"
 
-    # TODO: Add encoding somewhere to take care of non-ASCII characters ?
     # First argument is verbose name
     # blank=True means that field will not be required to create an entry
     image = models.ImageField("Photo", upload_to='employee_directory', default='employee_directory/NoPhotoDefault.gif', blank=False) #Default photo assured in importEmployee.py

@@ -8,14 +8,6 @@ from django.http import HttpResponseRedirect
 from forms import UpdateForm
 from django.core.mail import send_mail
 
-# #Default view
-# def index(request):
-#     # return render(request, 'employee_table.html', {'employees': Employee.objects.all()})
-#     table = EmployeeTable(Employee.objects.all())
-#     RequestConfig(request).configure(table)
-#     return render(request, 'employee_directory/employee_table.html', {'table': table})
-
-
 # Default view
 def employee_list(request):
     f = EmployeeFilter(request.GET, queryset=Employee.objects.all())
