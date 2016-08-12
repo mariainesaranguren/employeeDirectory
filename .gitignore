@@ -9,3 +9,5 @@ mysite/dist
 
 *pip-selfcheck.json
 environment-*.sh
+
+mysite/src/
