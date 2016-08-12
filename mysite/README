@@ -1,29 +1,22 @@
 This is an employee directory web program written in Python using the Django framework and the MySQL database system. The directory uses two apps: django-tables2 and django-filter. Django-tables2 allows for the building of the tables and comes with built-in functionality for sorting by field and pagination. Django-filter allows for the search bars that allow a user to look up an employee by name, team, or through a global search which looks in all fields. The Django framework enables the administration site in which a user with the correct permissions can access and edit more employee information. Users may also delete employee entries or create new ones.
 
-Last update: August 12, 2016
-Maria Ines Aranguren
-
-
 Important files:
 requirements.txt - Lists requirements for app used to create the environment. Used with $pip install -r requirements.txt
-
 fabfile.py - Task manager used to run commands and deploy project.
-
 mysite/employee_directory/models.py - Declares employee model.
-
 mysite/employee_directory/admin.py - Defines the model class for the admin page which determines visible fields, filters, and default ordering. Allows for some customization of admin site, such as site headers and title.
-
 mysite/employee_directory/filters.py - Declares and defines filtering functionality on main site.
-
 mysite/employee_directory/tables.py - Declares and defines table class for table on main site. Includes customized column for showing images.
-
 mysite/employee_directory/urls.py - Determines which view to use for each URL domain in the normal page (not admin). Currently has two views: default view and view for sending email to administrator.
-
 mysite/employee_directory/views.py - Defines default directory view and view for sending email to administrator.
-
+mysite/employee_directory/templates/employee_directory/employee_table.html - Base HTML code for site. Displays table. Has hard-coded localhost links that need to be changed.
+mysite/employee_directory/templates/employee_directory/filtering.html - HTML code for filters/searching feature. Extends employee_table.html.
+mysite/employee_directory/templates/employee_directory/update_form.html - HTML code for email sending feature. Extends employee_table.html. Has hard-coded localhost links that need to be changed.
 mysite/mysite/settings - Lists the installed apps and determines which database to connect to given the app environment. This file also declares some variables for managing static files and user-uploaded media.
-
 mysite/mysite/urls.py - Determines which view to use for each URL domain in the page.
-
-mysite/management/commands/importEmployee.py - Parses a CSV found in mysite and creates or updates employee entries. The input CSV (not shared on github) has the following columns in this order: Email address, first name, last name, team, position, manager, birthdate, start date, image, cell phone number, personal email, street and number, neighborhood, city, state, zip code, country, emergency contact info, allergies, blood type. The command checks with the entry’s email field to determine whether to create a new employee object or update an existing one.
+mysite/management/commands/importEmployee.py - Parses a CSV found in mysite and creates or updates employee entries. The input CSV (not shared on github) has the following columns in this order: Email address, first name, last name, team, position, manager, birthdate, start date, image, cell phone number, personal email, street and number, neighborhood, city, state, zip code, country, emergency contact info, allergies, blood type.
+* The command checks with the entry’s email field to determine whether to create a new employee object or update an existing one. The code does not delete employee entries that are no longer on the spreadsheet. The csv file this command reads is not on the repository but has been shared with Claudia and Vidal. The path to read it is hard coded and will have to be changed.
 * CSVs can be exported from Google spreadsheets: File > Export as > Comma separated values
+
+Last update: August 12, 2016
+Maria Ines Aranguren
