@@ -6,10 +6,7 @@ import datetime
 from datetime import date
 import math
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-
-class Command(BaseCommand): #T he class must be named Command, and subclass BaseCommand
-    # Show this when the user types help
+class Command(BaseCommand):
     help = "Test command - will be modified to import employee entries."
 
     def format_date_field(self, date_raw):
